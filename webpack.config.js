@@ -1,7 +1,9 @@
 const path = require('path');
 const config = require('./config');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const copyWebpackPlugin = require('copy-webpack-plugin');
 const isDev = process.env.NODE_ENV ? process.env.NODE_ENV.toString().toLowerCase() == 'dev' : false;
+
 var webpackConfig = {
     watch: isDev,
     entry: {
@@ -31,7 +33,7 @@ var webpackConfig = {
             },
             {
                 test: /\.scss$/,
-                loaders: ['style-loader','css-loader', 'autoprefixer-loader','sass-loader']
+                loaders: ['style-loader', 'css-loader', 'autoprefixer-loader', 'sass-loader']
             },
             {
                 test: /\.(png|jpg)$/,
@@ -41,15 +43,17 @@ var webpackConfig = {
     },
     plugins: [
         new htmlWebpackPlugin({
-            title: 'AepKill Template',
-            template: path.resolve(config.APP_PATH, 'index.html')
+            template: config.MAIN_FILE
+        }),
+        new copyWebpackPlugin(config.COPY_PATHS, {
+            copyUnmodified: isDev
         })
     ],
     devServer: {
         historyApiFallback: true,
         hot: true,
         inline: true,
-        progress: true,
+        progress: true
     }
 }
 module.exports = webpackConfig;
