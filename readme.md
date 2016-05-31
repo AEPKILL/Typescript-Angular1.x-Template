@@ -4,3 +4,5 @@
 
 `npm run dev` 开发模式
 
+`config.js` 配置文件
+

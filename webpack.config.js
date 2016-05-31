@@ -1,3 +1,4 @@
+"use strict";
 const path = require('path');
 const config = require('./config');
 const htmlWebpackPlugin = require('html-webpack-plugin');
@@ -6,6 +7,7 @@ const isDev = process.env.NODE_ENV ? process.env.NODE_ENV.toString().toLowerCase
 
 var webpackConfig = {
     watch: isDev,
+    devtool: 'inline-source-map',
     entry: {
         app: path.resolve(config.APP_PATH, 'app.ts')
     },
@@ -55,5 +57,7 @@ var webpackConfig = {
         inline: true,
         progress: true
     }
-}
+};
+
+
 module.exports = webpackConfig;
