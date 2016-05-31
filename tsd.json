@@ -7,6 +7,12 @@
   "installed": {
     "webpack/webpack-env.d.ts": {
       "commit": "3644ba6e4f6f4421001fc73d795d684384abb2c7"
+    },
+    "angularjs/angular.d.ts": {
+      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
     }
   }
 }

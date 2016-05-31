@@ -7,7 +7,6 @@ const isDev = process.env.NODE_ENV ? process.env.NODE_ENV.toString().toLowerCase
 
 var webpackConfig = {
     watch: isDev,
-    devtool: 'inline-source-map',
     entry: {
         app: path.resolve(config.APP_PATH, 'app.ts')
     },
@@ -35,7 +34,7 @@ var webpackConfig = {
             },
             {
                 test: /\.scss$/,
-                loaders: ['style-loader', 'css-loader', 'autoprefixer-loader', 'sass-loader']
+                loaders: isDev ? ['style-loader', 'css-loader', 'autoprefixer-loader', 'sass-loader'] : ['style-loader', 'css-loader', 'autoprefixer-loader', 'csso-loader','sass-loader']
             },
             {
                 test: /\.(png|jpg)$/,
@@ -59,5 +58,8 @@ var webpackConfig = {
     }
 };
 
-
+// Develop Mode
+if (isDev) {
+    webpackConfig.devtool = 'inline-source-map';
+}
 module.exports = webpackConfig;

@@ -1,7 +1,9 @@
-class Person {
-    public name: string;
-    public constructor({name = 'aepkill'}={}){
-        this.name = name;
-    }
+import * as angular from 'angular';
+const css:{} = require('./main.scss');
+console.log(css);
+let app = angular.module('app', []);
+class AppController {
+    
 }
-console.log(new Person().name);
+app.controller('AppController', AppController);
+angular.bootstrap(document.documentElement, ['app']);
