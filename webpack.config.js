@@ -8,7 +8,10 @@ const isDev = process.env.NODE_ENV ? process.env.NODE_ENV.toString().toLowerCase
 var webpackConfig = {
     watch: isDev,
     entry: {
-        app: path.resolve(config.APP_PATH, 'app.ts')
+        app: path.resolve(config.APP_PATH, 'App.ts')
+    },
+    resolve: {
+        extensions: ['', '.js', '.ts']
     },
     output: {
         path: config.DIST_PATH,
@@ -24,6 +27,10 @@ var webpackConfig = {
         ],
         loaders: [
             {
+                test: /\.json$/,
+                loader: 'json-loader'
+            },
+            {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 loaders: ['babel-loader', 'awesome-typescript-loader']
@@ -34,7 +41,7 @@ var webpackConfig = {
             },
             {
                 test: /\.scss$/,
-                loaders: isDev ? ['style-loader', 'css-loader', 'autoprefixer-loader', 'sass-loader'] : ['style-loader', 'css-loader', 'autoprefixer-loader', 'csso-loader','sass-loader']
+                loaders: ['style-loader', `css-loader?modules&localIdentName=[hash:base64:5]`, 'autoprefixer-loader', 'sass-loader']
             },
             {
                 test: /\.(png|jpg)$/,
@@ -52,14 +59,28 @@ var webpackConfig = {
     ],
     devServer: {
         historyApiFallback: true,
-        hot: true,
-        inline: true,
         progress: true
     }
 };
 
 // Develop Mode
+// 开发模式
 if (isDev) {
     webpackConfig.devtool = 'inline-source-map';
+
+    // Product Mode
+    // 生产模式
+} else {
+    let loaders = webpackConfig.module.loaders;
+
+    // SCSS loader
+    // 生产模式添加 'csso-loader' 进一步优化 css
+    let scssLoader = loaders.filter(e => e.test.toString() == String.raw`/\.scss$/`)[0];
+    scssLoader.loaders.splice(-1, 0, 'csso-loader');
+
+    // TS loader
+    // 生产模式添加 'ng-annotate' 给angular注入参数
+    let tsLoader = loaders.filter(e => e.test.toString() == String.raw`/\.tsx?$/`)[0];
+    tsLoader.loaders.unshift('ng-annotate');
 }
 module.exports = webpackConfig;

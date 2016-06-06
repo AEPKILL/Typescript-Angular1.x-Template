@@ -6,12 +6,15 @@
   "scripts": {
     "dev": "SET NODE_ENV=DEV&&webpack-dev-server --hot --inline",
     "build": "npm run clean&&webpack -p",
-    "clean": "node ./scripts/clean"
+    "clean": "node ./scripts/clean",
+    "makeRI": "node ./scripts/MakeRouterInfo",
+    "new": "node ./scripts/new"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "angular-ui-router": "^0.3.0",
     "autoprefixer-loader": "^3.2.0",
     "awesome-typescript-loader": "^0.17.0",
     "babel": "^6.5.2",
@@ -23,6 +26,7 @@
     "csso-loader": "^0.2.0",
     "file-loader": "^0.8.5",
     "fs-extra": "^0.30.0",
+    "ng-annotate-loader": "^0.1.0",
     "node-sass": "^3.7.0",
     "path": "^0.12.7",
     "raw-loader": "^0.5.1",
@@ -33,11 +37,17 @@
     "tslint": "^3.10.2",
     "tslint-loader": "^2.1.4",
     "typescript": "^1.8.10",
+    "typescript-require": "git+https://github.com/AepKill/typescript-require.git",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "angular": "^1.5.6"
+    "angular": "^1.5.6",
+    "angular-animate": "^1.5.6",
+    "angular-aria": "^1.5.6",
+    "angular-material": "^1.1.0-rc.5",
+    "angular-ui-router": "^0.3.0",
+    "promise": "^7.1.1"
   }
 }

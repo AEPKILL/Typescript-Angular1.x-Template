@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-controller="AppController as app">
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <title ng-bind="app.name"></title>
+    <link rel="stylesheet" href="./static/css/angular-material.css">
+    <script type="text/javascript">
+        var applicationBootstrap = false;
+    </script>
 </head>
-<body ng-controller="AppController as app">
-  <h1>{{app.name}}</h1>
+<body ui-view >
+    
 </body>
 </html>
